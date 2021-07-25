@@ -21,21 +21,27 @@ def check_winner(board):
     board_reversed = board[::-1] #reverses the board so it can scan and check from bottom to top
 
     def check_rows(input_board): 
-        
         for row in input_board:
-
+            
             for slot in range(len(row)):
                 if (row[slot] == 'R') and (len(set(row[slot:slot+4])) == 1):
                     return 'R'
                 elif (row[slot] == 'Y') and (len(set(row[slot:slot+4])) == 1):
                     return 'Y'
 
+    def check_collumns():
+
+        transposed_board = [[row[i] for row in board] for i in range(len(board[0]))]
+        check_rows(transposed_board)
 
     #returns who the winner is
-    if (check_rows(board_reversed) == 'R'):
-        return 'R'
-    elif (check_rows(board_reversed) == 'Y'):
-        return 'Y'
+    if (' ' in board[0]):
+        if (check_rows(board_reversed) == 'R') or (check_collumns() == 'R'):
+            return 'R'
+        elif (check_rows(board_reversed) == 'Y') or (check_collumns() == 'Y'):
+            return 'Y'
+    else:
+        return 'draw'
 
 
 
@@ -45,16 +51,14 @@ def connect4():
 
     
 
-
-
     #board that holds the game data
     playing_board = [
         [' ', ' ', ' ', ' ', ' ', ' ', ' ',],
         [' ', ' ', ' ', ' ', ' ', ' ', ' ',],
         [' ', ' ', ' ', ' ', ' ', ' ', ' ',],
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ',],
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ',],
-        ['Y', 'Y', 'Y', ' ', ' ', ' ', ' ',],
+        ['Y', ' ', ' ', ' ', ' ', ' ', 'R',],
+        ['Y', ' ', ' ', ' ', ' ', ' ', 'R',],
+        ['Y', 'Y', 'Y', ' ', 'R', 'R', 'R',],
     ]
 
 
@@ -69,7 +73,7 @@ def connect4():
     while (winner == ''):
         
         #checks for a winner
-        if (check_winner(playing_board) == 'R') or (check_winner(playing_board) == 'Y'):
+        if (check_winner(playing_board) == 'R') or (check_winner(playing_board) == 'Y') or (check_winner(playing_board) == 'draw'):
             winner = check_winner(playing_board)
             break
 
@@ -106,8 +110,8 @@ def connect4():
         print(' --- --- --- --- --- --- ---')
         
 
-        
-        chosen_slot = int(input('Pick a slot number to enter your token: ') or "0")
+        #prompts user for a slot
+        chosen_slot = int(input('Pick a slot number to drop your token: ') or "0")
         
         clear()
 
@@ -122,8 +126,6 @@ def connect4():
                     playing_board[::-1][row][chosen_slot] = turn
                     break
                     
-
-
         #makes sure valid slots are entered into chosen_slot
         else:       
             print('Sorry that is not a valid game slot number.')
