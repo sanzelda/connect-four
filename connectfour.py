@@ -19,21 +19,45 @@ pause = lambda: input('\nPlease press Enter to continue...')
 
 def check_winner(board):
     board_reversed = board[::-1] #reverses the board so it can scan and check from bottom to top
+    
 
     def check_rows(input_board): 
         for row in input_board:
             
             for slot in range(len(row)):
-                if (row[slot] == 'R') and (len(set(row[slot:slot+4])) == 1):
-                    return 'R'
-                elif (row[slot] == 'Y') and (len(set(row[slot:slot+4])) == 1):
-                    return 'Y'
-
+                if (slot >= 4):
+                    continue
+                else:
+                    if (row[slot] == 'R') and (len(set(row[slot:slot+4])) == 1):
+                        return 'R'
+                    elif (row[slot] == 'Y') and (len(set(row[slot:slot+4])) == 1):
+                        return 'Y'
+                
+        
     def check_collumns():
 
-        transposed_board = [[row[i] for row in board] for i in range(len(board[0]))]
-        check_rows(transposed_board)
+        transposed_board = [[row[i] for row in board_reversed] for i in range(len(board_reversed[0]))]
 
+        #uses check_rows because if functions the same way when the board transposed
+        return check_rows(transposed_board)
+
+        #manual version instead of using check_rows
+        """for row in transposed_board:
+            
+            print(row)
+            for slot in range(len(row)):
+                if (slot >= 4):
+                    
+                    continue
+                else:
+                    if (row[slot] == 'R') and (len(set(row[slot:slot+4])) == 1):
+                        print(row[slot:slot+4])
+                        return 'R'
+                    elif (row[slot] == 'Y') and (len(set(row[slot:slot+4])) == 1):
+                        return 'Y'"""
+
+        
+    
     #returns who the winner is
     if (' ' in board[0]):
         if (check_rows(board_reversed) == 'R') or (check_collumns() == 'R'):
@@ -58,7 +82,7 @@ def connect4():
         [' ', ' ', ' ', ' ', ' ', ' ', ' ',],
         ['Y', ' ', ' ', ' ', ' ', ' ', 'R',],
         ['Y', ' ', ' ', ' ', ' ', ' ', 'R',],
-        ['Y', 'Y', 'Y', ' ', 'R', 'R', 'R',],
+        ['Y', 'Y', 'Y', ' ', ' ', ' ', 'R',],
     ]
 
 
