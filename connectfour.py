@@ -135,13 +135,16 @@ def connect4():
         
 
         #prompts user for a slot
-        chosen_slot = int(input('Pick a slot number to drop your token: ') or "0")
+        chosen_slot = input('Pick a slot number to drop your token: ')
+        slots = '1234567'
+
         
         clear()
 
-        slots = '1234567'
+        
         #starts process of placing the token
-        if (str(chosen_slot) in slots) and (chosen_slot):
+        if (chosen_slot in slots) and (chosen_slot):
+            chosen_slot = int(chosen_slot)
             chosen_slot -= 1
 
             #places token in chosen row
@@ -153,9 +156,9 @@ def connect4():
         #makes sure valid slots are entered into chosen_slot
         else:       
             print('Sorry that is not a valid game slot number.')
-            input('Press Enter to try again...')
+            input('\nPress Enter to try again...')
             continue
-        pause()
+        
 
         #switches turn if there is no winner
         if (winner == ''):
@@ -168,11 +171,23 @@ def connect4():
     #prints the winner message
     print(' ')
     if (winner == 'R'):
-        print('Congrats, the winner of the game is RED!!!')
+        #print('Congrats, the winner of the game is RED!!!')
+        print(' ___  ___  ___        __      __ ___  _  _  ___  ')
+        print('| _ \| __||   \       \ \    / /|_ _|| \| |/ __| ')
+        print('|   /| _| | |) |       \ \/\/ /  | | | .  |\__ \ ')
+        print('|_|_\|___||___/         \_/\_/  |___||_|\_||___/ ')
     elif(winner == 'Y'):
-        print('Congrats, the winner of the game is YELLOW!!!')
+        #print('Congrats, the winner of the game is YELLOW!!!')
+        print('__   __ ___  _     _      ___  __      __      __      __ ___  _  _  ___  ')
+        print('\ \ / /| __|| |   | |    / _ \ \ \    / /      \ \    / /|_ _|| \| |/ __| ')
+        print(' \   / | _| | |__ | |__ | (_) | \ \/\/ /        \ \/\/ /  | | | .  |\__ \ ')
+        print('  |_|  |___||____||____| \___/   \_/\_/          \_/\_/  |___||_|\_||___/ ')
     elif (winner == 'draw'):
-        print('It\'s a draw!!!')
+        #print('It\'s a draw!!!')
+        print(' ___    ___   ___  __      __  _  ') 
+        print('|   \  | _ \ /   \ \ \    / / | | ') 
+        print('| |) | |   / | - |  \ \/\/ /  |_| ') 
+        print('|___/  |_|_\ |_|_|   \_/\_/   (_) ') 
 
 
 
