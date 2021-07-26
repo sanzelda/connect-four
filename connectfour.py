@@ -82,6 +82,13 @@ def check_winner(board):
     else:
         return 'draw'
 
+#welcome message
+print('\nWelcome to a python connect4 game writting in the terminal!!')
+print('The first player will be RED, the other player is YELLOW')
+pause()
+clear()
+
+
 #connect4 main fuction
 def connect4():
 
@@ -96,10 +103,7 @@ def connect4():
     ]
 
     clear()
-    print('\nWelcome to a python connect4 game writting in the terminal!!')
-    print('The first player will be RED, the other player is YELLOW')
-    pause()
-    clear()
+    
 
     winner = ''
     turn = 'R'
